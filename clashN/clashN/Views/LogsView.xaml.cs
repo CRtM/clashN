@@ -3,6 +3,7 @@ using ReactiveUI;
 using System.Reactive.Disposables;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace ClashN.Views
@@ -24,6 +25,8 @@ namespace ClashN.Views
                 this.Bind(ViewModel, vm => vm.MsgFilter, v => v.txtFilter.Text).DisposeWith(disposables);
                 this.Bind(ViewModel, vm => vm.AutoRefresh, v => v.togAutoRefresh.IsChecked).DisposeWith(disposables);
                 this.Bind(ViewModel, vm => vm.LineCount, v => v.cmbLineCount.Text).DisposeWith(disposables);
+                //this.Bind(ViewModel, vm => vm.LogCount, v => v.cmbLogCount.Text).DisposeWith(disposables);
+                this.OneWayBind(ViewModel, vm => vm.SelectedCoreLogs, v => v.logList.ItemsSource).DisposeWith(disposables);
             });
         }
 
@@ -69,9 +72,18 @@ namespace ClashN.Views
             Dispatcher.Invoke((Action)(() =>
             {
                 txtMsg.Clear();
+                ViewModel.ClearCoreLogs();
             }));
         }
 
+        private void FilterChangedCommand(object sender, TextChangedEventArgs e)
+        {
+            if(ViewModel != null )
+            {
+                ViewModel.LogFilter = txtFilter.Text;
+                ViewModel.FilterCoreLogs();
+            }
+        }
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             ClearMsg();

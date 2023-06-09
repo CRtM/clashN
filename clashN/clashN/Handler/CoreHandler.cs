@@ -219,14 +219,15 @@ namespace ClashN.Handler
                 //{
                 //    p.StartInfo.Verb = "runas";
                 //}
-                p.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
-                {
-                    if (!String.IsNullOrEmpty(e.Data))
-                    {
-                        string msg = e.Data + Environment.NewLine;
-                        ShowMsg(false, msg);
-                    }
-                });
+                // p.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
+                // {
+                //     if (!String.IsNullOrEmpty(e.Data))
+                //     {
+                //         string msg = e.Data + Environment.NewLine;
+                //         ShowMsg(false, msg);
+                //     }
+                // });
+                p.OutputDataReceived += CoreLogHandler.CoreDataReceived;
                 p.Start();
                 //p.PriorityClass = ProcessPriorityClass.High;
                 p.BeginOutputReadLine();

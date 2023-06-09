@@ -33,10 +33,11 @@
                     VerticalAlignment="Center"
                     Style="{StaticResource ToolbarItem}"
                     Text="{x:Static resx:ResUI.TbFilter}" />
-                <TextBox
-                    x:Name="txtFilter"
-                    Width="200"
-                    Margin="8" />
+                <TextBox x:Name="txtFilter" Width="200" Margin="8" TextChanged="FilterChangedCommand">
+                    <!-- <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding FilterChangedCommand}" Key="Return"></KeyBinding>
+                    </TextBox.InputBindings> -->
+                </TextBox>
                 <Separator />
                 <Button x:Name="btnDelete" Click="btnDelete_Click">
                     <StackPanel Orientation="Horizontal">
@@ -69,15 +70,46 @@
                     <ComboBoxItem Content="2000" />
                     <ComboBoxItem Content="3000" />
                 </ComboBox>
+                <!-- <Separator />
+                <ComboBox
+                    x:Name="cmbLogCount"
+                    Width="80"
+                    Margin="8"
+                    Style="{StaticResource DefComboBox}">
+                    <ComboBoxItem Content="100" />
+                    <ComboBoxItem Content="200" />
+                    <ComboBoxItem Content="300" />
+                </ComboBox> -->
             </ToolBar>
         </ToolBarTray>
-        <TextBox
-            Name="txtMsg"
-            BorderThickness="0"
-            FontSize="{DynamicResource StdFontSize}"
-            HorizontalScrollBarVisibility="Auto"
-            IsReadOnly="True"
-            TextWrapping="Wrap"
-            VerticalScrollBarVisibility="Visible" />
+        <Grid VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <ListView
+                x:Name="logList"
+                d:ItemsSource="{Binding}"
+                SelectionMode="Multiple"
+                Grid.Row="0">
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Time}" Header="时间" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Level}" Header="等级" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Payload}" Header="信息" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <RibbonSeparator IsEnabled="True"/>
+                <TextBox
+                x:Name="txtMsg"
+                BorderThickness="0"
+                FontSize="{DynamicResource StdFontSize}"
+                HorizontalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                TextWrapping="Wrap"
+                VerticalScrollBarVisibility="Visible" VerticalAlignment="Top"
+                Grid.Row="1" />
+        </Grid>
     </DockPanel>
 </reactiveui:ReactiveUserControl>

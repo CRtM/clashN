@@ -3,6 +3,7 @@
 ################################################################################
 `
 /clashN/.vs/
+/clashN/clashN/bin/x64
 /clashN/clashN/bin/Debug/app.publish
 /clashN/clashN/bin/Debug
 /clashN/clashN/bin/Release
@@ -12,6 +13,7 @@
 .vs/ProjectSettings.json
 .vs/slnx.sqlite
 .vs/VSWorkspaceState.json
+/clashN/clashUpgrade/bin/x64
 /clashN/clashUpgrade/bin/Debug
 /clashN/clashUpgrade/obj/Debug 
 /clashN/clashUpgrade/bin/Release
@@ -19,4 +21,7 @@
 /clashN/clashUpgrade/obj
 /clashN/clashUpgrade/Properties/PublishProfiles
 /clashN/clashN/Properties/PublishProfiles
+/.vscode
 *.user
+clashN/UpgradeLog.htm
+clashN/Backup/clashN.sln
